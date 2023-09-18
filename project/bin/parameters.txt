@@ -1,4 +1,3 @@
 baboon.pgm baboon_rBin.pgm rBin         100 100 100 45 90
 baboon_rBin.pgm baboon_rBin2.pgm rBin   200 400 350 40 60
-
-baboon.pgm baboon_rAdd.pgm rAdd         50 0 0 400 300
+baboon.pgm baboon_rAdd.pgm rAdd         100 0 0 400 300
