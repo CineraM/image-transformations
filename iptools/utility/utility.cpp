@@ -16,8 +16,8 @@ int utility::checkValue(int value)
 
 bool check_roi(int i, int j, int roi_i, int roi_j, int roi_i_size, int roi_j_size)
 {
-	if(i >= roi_i && i <= roi_i+roi_i_size)
-		if(j >= roi_j && j <= roi_j+roi_j_size) 
+	if(i >= roi_i && i <= roi_i+roi_i_size-1)
+		if(j >= roi_j && j <= roi_j+roi_j_size-1) 
 			return 1;
 	return 0;
 }
@@ -60,7 +60,81 @@ void utility::roi_addGrey(image &src, image &tgt, int value, int roi_i,
 		{
 			if(check_roi(i, j, roi_i, roi_j, roi_i_size, roi_j_size))
 			{
-				tgt.setPixel(i,j,checkValue(src.getPixel(i,j) + value)); 
+				tgt.setPixel(i, j, checkValue(src.getPixel(i,j) + value)); 
+			}
+			else
+			{
+				tgt.setPixel( i, j, src.getPixel(i,j) );
+			}
+				
+		}
+	}
+}
+
+
+void utility::roi_rotate(image &src, image &tgt, int angle, int roi_i, 
+		int roi_j, int roi_i_size, int roi_j_size)
+{
+	int rows = src.getNumberOfRows();
+	int cols = src.getNumberOfColumns();
+
+	tgt.resize(rows, cols);
+	// tgt.resize(roi_i_size, roi_j_size);
+
+	image rotated, roi;
+	roi.resize(roi_i_size, roi_j_size);
+	rotated.resize(roi_i_size, roi_j_size);
+
+	for (int i=0; i<=roi_i_size; i++)
+	{
+		for (int j=0; j<=roi_j_size; j++)
+		{
+			roi.setPixel(i, j, src.getPixel(i+roi_i, j+roi_j));
+		}
+	}
+
+	for (int i=0; i<roi_i_size; i++)
+	{
+		for (int j=0; j<roi_j_size; j++)
+		{
+			int new_i, new_j;
+			if(angle == 90)
+			{
+				new_i = j;
+				new_j = roi_i_size - i;
+			}
+			else if(angle == 180)
+			{
+				new_i = roi_i_size - i;
+				new_j = roi_j_size - j;	
+			}
+			else if(angle == 270)
+			{
+				new_i = roi_j_size - j;
+				new_j = i;	
+			}
+			
+			// rotated.setPixel(new_i, new_j, roi.getPixel(i, j));
+			if(new_i >= 0 && new_i <= roi_i_size)
+			{
+				if(new_j >= 0 && new_j <= roi_j_size)
+					rotated.setPixel(new_i, new_j, roi.getPixel(i, j));
+			}
+			else
+				rotated.setPixel(i, j, MINRGB);
+		}
+	}
+
+
+
+	for (int i=0; i<src.getNumberOfRows(); i++)
+	{
+		for (int j=0; j<src.getNumberOfColumns(); j++)
+		{
+			
+			if(check_roi(i, j, roi_i, roi_j, roi_i_size, roi_j_size))
+			{
+				tgt.setPixel(i, j, rotated.getPixel(i-roi_i, j-roi_j) ); 
 			}
 			else
 			{

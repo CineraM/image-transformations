@@ -87,6 +87,26 @@ int main (int argc, char** argv)
         	utility::roi_addGrey(src, tgt, value, roi_i, roi_j, roi_i_size, roi_j_size);
         }
 
+        else if (strcmp(pch,"rRotate")==0) 
+		{
+			pch = strtok(NULL, " ");
+			int angle = atoi(pch);
+
+			pch = strtok(NULL, " ");
+			int roi_i = atoi(pch);
+
+			pch = strtok(NULL, " ");
+			int roi_j = atoi(pch);
+
+			pch = strtok(NULL, " ");
+			int roi_i_size = atoi(pch);
+
+			pch = strtok(NULL, " ");
+			int roi_j_size = atoi(pch);
+
+        	utility::roi_rotate(src, tgt, angle, roi_i, roi_j, roi_i_size, roi_j_size);
+        }
+
 		pch = strtok(NULL, " ");
 
 		tgt.save(outfile);

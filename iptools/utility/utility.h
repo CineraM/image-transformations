@@ -19,6 +19,9 @@ class utility
 
 		static void roi_addGrey(image &src, image &tgt, int threshold, int roi_i, 
 		int roi_j, int roi_i_size, int roi_j_size);
+
+		static void roi_rotate(image &src, image &tgt, int angle, int roi_i, 
+		int roi_j, int roi_i_size, int roi_j_size);
 };
 
 #endif
