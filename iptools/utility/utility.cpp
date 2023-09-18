@@ -101,16 +101,16 @@ void utility::roi_rotate(image &src, image &tgt, int angle, int roi_i,
 			if(angle == 90)
 			{
 				new_i = j;
-				new_j = roi_i_size - i;
+				new_j = roi_i_size - 1 - i;
 			}
 			else if(angle == 180)
 			{
-				new_i = roi_i_size - i;
-				new_j = roi_j_size - j;	
+				new_i = roi_i_size - 1 - i;
+				new_j = roi_j_size - 1 - j;	
 			}
 			else if(angle == 270)
 			{
-				new_i = roi_j_size - j;
+				new_i = roi_j_size - 1 - j;
 				new_j = i;	
 			}
 			
