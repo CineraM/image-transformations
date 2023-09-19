@@ -77,11 +77,6 @@ int main (int argc, char** argv)
 				XD
 				utility::rotateWrapper(temp, tgt, atoi(pch), roi_i, roi_j, roi_i_size, roi_j_size);
 			}
-			else if (strcmp(pch,"test")==0)	// test parameter
-			{
-				XD
-				utility::test(temp, tgt, atoi(pch), roi_i, roi_j, roi_i_size, roi_j_size);	
-			}
 			temp.copyImage(tgt);
 		}
 
