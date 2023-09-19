@@ -1,0 +1,42 @@
+Each function call should contain the following parameters, each separated by a single space.
+Every new function call will begin on a new line.
+
+source output #roi x1 y1 Sx1 Sy1 func p1 p2 pX x2 y2 Sx2 Sy2 func p1 p2 pX
+
+o source - name of original input image
+o output- name of new modified output image
+o #roi-- number of ROIs
+o func- function name to be applied
+o x - initial row, this means the first pixel in the leftmost position to begin the ROI calculation
+o y - initial column, means first pixel in the top most position to begin the ROI calculation.
+o Sx - total number of pixels in the x axis
+o Sy - total number of pixels in the y axis
+o p1, p2, . . . ,pX - parameters needed for function. Can range from 1 parameter through X number parameters depending on the function.
+
+HW1 Specific Function Information:
+
+
+
+1. 	
+Modifying the hw0_code (general)
+
+
+2. 	
+Input.pgm output.pgm  3 0 0 50 50 binarize 50   50 50 100 100 binarize 100   100 100 100 100 binarize 150
+
+3.  
+You can use the same parameter structure as in question 2, but add one more parameter for rotation (90, 180, 270)
+Input.pgm bina_output.pgm  3 0 0 50 50 binarize 50   50 50 100 100 binarize 100   100 100 100 100 binarize 150 
+
+4.  
+You can use the same parameter structure as in question 2, but add one more parameter for rotation (90, 180, 270)
+Input.pgm bina_output.pgm  3 0 0 50 50 binarize 50   50 50 100 100 binarize 100   100 100 100 100 binarize 150 
+
+
+
+
+
+
+
+
+

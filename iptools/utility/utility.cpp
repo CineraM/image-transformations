@@ -106,6 +106,7 @@ int roi_i_size, int roi_j_size)
 
 void utility::scale(image &src, image &tgt, float ratio)
 {
+	ratio/=10;
 	int rows = (int)((float)src.getNumberOfRows() * ratio);
 	int cols  = (int)((float)src.getNumberOfColumns() * ratio);
 	tgt.resize(rows, cols);
@@ -121,6 +122,7 @@ void utility::scale(image &src, image &tgt, float ratio)
 		}
 	}
 }
+
 
 void utility::rotate(image &src, image &tgt, int angle)
 {
@@ -158,22 +160,36 @@ void utility::rotate(image &src, image &tgt, int angle)
 }
 
 
-// Define wrapper fncs
-
-// void utility::binarize_wrapper(image &src, image &tgt, int fnc_input, 
-// int roi_i, int roi_j, int roi_i_size, int roi_j_size)
-// {
-// 	roi(src, temp1, 0, 0, 400, 350);
-// 	addGrey(temp1, temp2, 80);
-// 	mergeRoi(src, temp2, tgt, 0, 0, 400, 350);
-// }
-
-
-
 void utility::binarizeWrapper(image &src, image &tgt, int fnc_input, 
 int roi_i, int roi_j, int roi_i_size, int roi_j_size)
 {
 	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
 	binarize(temp1, temp2, fnc_input);
+	mergeRoi(src, temp2, tgt, roi_i, roi_j, roi_i_size, roi_j_size);
+}
+
+
+void utility::addGreyWrapper(image &src, image &tgt, int fnc_input, 
+int roi_i, int roi_j, int roi_i_size, int roi_j_size)
+{
+	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
+	addGrey(temp1, temp2, fnc_input);
+	mergeRoi(src, temp2, tgt, roi_i, roi_j, roi_i_size, roi_j_size);
+}
+
+
+void utility::scaleWrapper(image &src, image &tgt, int fnc_input, 
+int roi_i, int roi_j, int roi_i_size, int roi_j_size)
+{
+	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
+	scale(temp1, tgt, fnc_input);
+}
+
+
+void utility::rotateWrapper(image &src, image &tgt, int fnc_input, 
+int roi_i, int roi_j, int roi_i_size, int roi_j_size)
+{
+	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
+	rotate(temp1, temp2, fnc_input);
 	mergeRoi(src, temp2, tgt, roi_i, roi_j, roi_i_size, roi_j_size);
 }
