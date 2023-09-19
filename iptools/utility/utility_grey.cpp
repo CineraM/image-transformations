@@ -15,20 +15,6 @@ int utility::checkValue(int value)
 	return value;
 }
 
-// test fnc
-void utility::copyimg(image &src, image &tgt)
-{
-	tgt.resize(src.getNumberOfRows(), src.getNumberOfColumns());
-	for (int i=0; i<src.getNumberOfRows(); i++)
-	{
-		for (int j=0; j<src.getNumberOfColumns(); j++)
-		{
-			for(int channel = 0; channel<3; channel++)
-				tgt.setPixel(i, j, channel, src.getPixel(i, j, channel));
-		}
-	}
-}
-
 
 bool check_roi(int i, int j, int roi_i, int roi_j, int roi_i_size, int roi_j_size)
 {
@@ -50,15 +36,9 @@ void utility::roi(image &src, image &tgt, int roi_i, int roi_j, int roi_i_size, 
 		for (int j=0; j<roi_j_size; j++)
 		{
 			if((i+roi_i) >= rows || (j+roi_j) >= cols)
-			{
-				for(int channel = 0; channel<3; channel++)
-					tgt.setPixel(i, j, channel, MINRGB);
-			}
+				tgt.setPixel(i, j, MINRGB);
 			else
-			{
-				for(int channel = 0; channel<3; channel++)
-					tgt.setPixel(i, j, channel, src.getPixel(i+roi_i, j+roi_j, channel));
-			}
+				tgt.setPixel(i, j, src.getPixel(i+roi_i, j+roi_j));
 		}
 	}
 
@@ -76,13 +56,11 @@ int roi_i_size, int roi_j_size)
 			
 			if(check_roi(i, j, roi_i, roi_j, roi_i_size, roi_j_size))
 			{
-				for(int channel = 0; channel<3; channel++)
-					tgt.setPixel(i, j, channel, roi.getPixel(i-roi_i, j-roi_j, channel) ); 
+				tgt.setPixel(i, j, roi.getPixel(i-roi_i, j-roi_j) ); 
 			}
 			else
 			{
-				for(int channel = 0; channel<3; channel++)
-					tgt.setPixel(i, j, channel, src.getPixel(i,j, channel) );
+				tgt.setPixel(i, j, src.getPixel(i,j) );
 			}
 				
 		}
@@ -98,15 +76,9 @@ void utility::binarize(image &src, image &tgt, int threshold)
 		for (int j=0; j<src.getNumberOfColumns(); j++)
 		{
 			if (src.getPixel(i,j) < threshold)
-			{
-				for(int channel = 0; channel<3; channel++)
-					tgt.setPixel(i, j, channel, MINRGB);
-			}
+				tgt.setPixel(i,j,MINRGB);
 			else
-			{
-				for(int channel = 0; channel<3; channel++)
-					tgt.setPixel(i, j, channel, MAXRGB);
-			}
+				tgt.setPixel(i,j,MAXRGB);
 		}
 	}
 }
@@ -118,8 +90,7 @@ void utility::addGrey(image &src, image &tgt, int value)
 	for (int i=0; i<src.getNumberOfRows(); i++)
 		for (int j=0; j<src.getNumberOfColumns(); j++)
 		{
-			for(int channel = 0; channel<3; channel++)
-				tgt.setPixel(i, j, channel, checkValue(src.getPixel(i, j, channel)+value));
+			tgt.setPixel(i,j,checkValue(src.getPixel(i,j)+value)); 
 		}
 }
 
@@ -138,9 +109,8 @@ void utility::scale(image &src, image &tgt, float ratio)
 			int i2 = (int)floor((float)i/ratio);
 			int j2 = (int)floor((float)j/ratio);
 			// Directly copy the value 
-			for(int channel = 0; channel<3; channel++)
-				tgt.setPixel(i, j, channel, checkValue(src.getPixel(i2, j2, channel)));
-			}
+			tgt.setPixel(i,j,checkValue(src.getPixel(i2,j2)));
+		}
 	}
 }
 
@@ -174,9 +144,8 @@ void utility::rotate(image &src, image &tgt, int angle)
 				new_i = cols - 1 - j;
 				new_j = i;	
 			}
-
-			for(int channel = 0; channel<3; channel++)
-				tgt.setPixel(new_i, new_j, channel, src.getPixel(i, j, channel));
+			
+			tgt.setPixel(new_i, new_j, src.getPixel(i, j));
 		}
 	}
 }
@@ -213,19 +182,5 @@ int roi_i, int roi_j, int roi_i_size, int roi_j_size)
 {
 	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
 	rotate(temp1, temp2, fnc_input);
-	mergeRoi(src, temp2, tgt, roi_i, roi_j, roi_i_size, roi_j_size);
-}
-
-
-void utility::test(image &src, image &tgt, int fnc_input, 
-int roi_i, int roi_j, int roi_i_size, int roi_j_size)
-{
-	// roi(src, tgt, roi_i,  roi_j,  roi_i_size,  roi_j_size);
-	// rotate(src, tgt, 180);
-	// binarize(src, tgt, 80);
-	// addGrey(src, tgt, 80);
-
-	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
-	binarize(temp1, temp2, 100);
 	mergeRoi(src, temp2, tgt, roi_i, roi_j, roi_i_size, roi_j_size);
 }

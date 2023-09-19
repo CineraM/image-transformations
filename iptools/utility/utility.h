@@ -37,6 +37,11 @@ class utility
 		static void rotateWrapper(image &src, image &tgt, int fnc_input, 
 		int roi_i, int roi_j, int roi_i_size, int roi_j_size);
 
+		static void test(image &src, image &tgt, int fnc_input, 
+		int roi_i, int roi_j, int roi_i_size, int roi_j_size);
+
+		static void copyimg(image &src, image &tgt);
+
 };
 
 #endif

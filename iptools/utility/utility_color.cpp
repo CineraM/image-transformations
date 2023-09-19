@@ -65,31 +65,6 @@ void utility::roi(image &src, image &tgt, int roi_i, int roi_j, int roi_i_size, 
 }
 
 
-void utility::mergeRoi(image &src, image &roi,image &tgt, int roi_i, int roi_j, 
-int roi_i_size, int roi_j_size)
-{
-	tgt.resize(src.getNumberOfRows(), src.getNumberOfColumns());
-	for (int i=0; i<src.getNumberOfRows(); i++)
-	{
-		for (int j=0; j<src.getNumberOfColumns(); j++)
-		{
-			
-			if(check_roi(i, j, roi_i, roi_j, roi_i_size, roi_j_size))
-			{
-				for(int channel = 0; channel<3; channel++)
-					tgt.setPixel(i, j, channel, roi.getPixel(i-roi_i, j-roi_j, channel) ); 
-			}
-			else
-			{
-				for(int channel = 0; channel<3; channel++)
-					tgt.setPixel(i, j, channel, src.getPixel(i,j, channel) );
-			}
-				
-		}
-	}
-}
-
-
 void utility::binarize(image &src, image &tgt, int threshold)
 {
 	tgt.resize(src.getNumberOfRows(), src.getNumberOfColumns());
@@ -121,6 +96,31 @@ void utility::addGrey(image &src, image &tgt, int value)
 			for(int channel = 0; channel<3; channel++)
 				tgt.setPixel(i, j, channel, checkValue(src.getPixel(i, j, channel)+value));
 		}
+}
+
+
+void utility::mergeRoi(image &src, image &roi,image &tgt, int roi_i, int roi_j, 
+int roi_i_size, int roi_j_size)
+{
+	tgt.resize(src.getNumberOfRows(), src.getNumberOfColumns());
+	for (int i=0; i<src.getNumberOfRows(); i++)
+	{
+		for (int j=0; j<src.getNumberOfColumns(); j++)
+		{
+			
+			if(check_roi(i, j, roi_i, roi_j, roi_i_size, roi_j_size))
+			{
+				for(int channel = 0; channel<3; channel++)
+					tgt.setPixel(i, j, channel, src.getPixel(i-roi_i, j-roi_j, channel));
+			}
+			else
+			{
+				for(int channel = 0; channel<3; channel++)
+					tgt.setPixel(i, j, channel, src.getPixel(i, j, channel));
+			}
+				
+		}
+	}
 }
 
 
@@ -213,19 +213,5 @@ int roi_i, int roi_j, int roi_i_size, int roi_j_size)
 {
 	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
 	rotate(temp1, temp2, fnc_input);
-	mergeRoi(src, temp2, tgt, roi_i, roi_j, roi_i_size, roi_j_size);
-}
-
-
-void utility::test(image &src, image &tgt, int fnc_input, 
-int roi_i, int roi_j, int roi_i_size, int roi_j_size)
-{
-	// roi(src, tgt, roi_i,  roi_j,  roi_i_size,  roi_j_size);
-	// rotate(src, tgt, 180);
-	// binarize(src, tgt, 80);
-	// addGrey(src, tgt, 80);
-
-	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
-	binarize(temp1, temp2, 100);
 	mergeRoi(src, temp2, tgt, roi_i, roi_j, roi_i_size, roi_j_size);
 }
