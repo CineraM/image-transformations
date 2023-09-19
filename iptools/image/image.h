@@ -40,6 +40,7 @@ public:
    int getNumberOfRows();
    int getNumberOfColumns(); 
    vector<int>* getChannel(int rgb);
+   // bool isColor = false;
    
    bool setChannel(int rgb, vector<int> &channel);   
    bool save (char* file);

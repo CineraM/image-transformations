@@ -14,8 +14,6 @@ class utility
 		static std::string intToString(int number);
 		static int checkValue(int value);
 
-		static void copyImg(image &src, image &tgt);
-
 		static void roi(image &src, image &tgt, 
 		int roi_i, int roi_j, int roi_i_size, int roi_j_size);
 

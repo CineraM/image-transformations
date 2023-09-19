@@ -1,1 +1,4 @@
-veg.ppm veg_color.ppm 3 0 0 100 100 binarize 200     150 150 80 80 binarize 150     300 300 70 70 binarize 100 
+baboon.pgm baboon_q2.pgm 3 0 0 100 100 binarize 200     150 150 80 80 binarize 150     300 300 70 70 binarize 100 
+baboon.pgm baboon_q3.pgm 3 0 0 100 100 add 30     150 150 80 80 add 80     300 300 70 70 binarize 200
+baboon.pgm baboon_q3_v2.pgm 3 0 0 100 100 rotate 90     150 150 80 80 rotate 180     200 200 70 70 add 80
+baboon.pgm baboon_q3_scale_test.pgm 1 0 0 100 100 scale 13  
