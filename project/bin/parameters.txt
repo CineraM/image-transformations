@@ -1,4 +1,1 @@
-baboon.pgm baboon_add.pgm add 1
-baboon.pgm baboon_bin.pgm binarize 1
-baboon.pgm baboon_r90.pgm rotate 90
-baboon.pgm baboon_r180.pgm rotate 180
+baboon.pgm baboon_bin.pgm 3 0 0 100 100 binarize 200     150 150 80 80 binarize 150     300 300 70 70 binarize 100

@@ -3,6 +3,8 @@
 #define MAXRGB 255
 #define MINRGB 0
 
+image temp1, temp2;
+
 
 int utility::checkValue(int value)
 {
@@ -20,6 +22,15 @@ bool check_roi(int i, int j, int roi_i, int roi_j, int roi_i_size, int roi_j_siz
 		if(j >= roi_j && j <= roi_j+roi_j_size-1) 
 			return 1;
 	return 0;
+}
+
+
+void utility::copyImg(image &src, image &tgt)
+{
+	tgt.resize(src.getNumberOfRows(), src.getNumberOfColumns());
+	for (int i=0; i<src.getNumberOfRows(); i++)
+		for (int j=0; j<src.getNumberOfColumns(); j++)
+			tgt.setPixel(i, j, src.getPixel(i, j));
 }
 
 
@@ -93,6 +104,24 @@ int roi_i_size, int roi_j_size)
 }
 
 
+void utility::scale(image &src, image &tgt, float ratio)
+{
+	int rows = (int)((float)src.getNumberOfRows() * ratio);
+	int cols  = (int)((float)src.getNumberOfColumns() * ratio);
+	tgt.resize(rows, cols);
+	for (int i=0; i<rows; i++)
+	{
+		for (int j=0; j<cols; j++)
+		{	
+			/* Map the pixel of new image back to original image */
+			int i2 = (int)floor((float)i/ratio);
+			int j2 = (int)floor((float)j/ratio);
+			// Directly copy the value 
+			tgt.setPixel(i,j,checkValue(src.getPixel(i2,j2)));
+		}
+	}
+}
+
 void utility::rotate(image &src, image &tgt, int angle)
 {
 	int rows = src.getNumberOfRows();
@@ -126,4 +155,25 @@ void utility::rotate(image &src, image &tgt, int angle)
 			tgt.setPixel(new_i, new_j, src.getPixel(i, j));
 		}
 	}
+}
+
+
+// Define wrapper fncs
+
+// void utility::binarize_wrapper(image &src, image &tgt, int fnc_input, 
+// int roi_i, int roi_j, int roi_i_size, int roi_j_size)
+// {
+// 	roi(src, temp1, 0, 0, 400, 350);
+// 	addGrey(temp1, temp2, 80);
+// 	mergeRoi(src, temp2, tgt, 0, 0, 400, 350);
+// }
+
+
+
+void utility::binarizeWrapper(image &src, image &tgt, int fnc_input, 
+int roi_i, int roi_j, int roi_i_size, int roi_j_size)
+{
+	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
+	binarize(temp1, temp2, fnc_input);
+	mergeRoi(src, temp2, tgt, roi_i, roi_j, roi_i_size, roi_j_size);
 }

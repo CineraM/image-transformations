@@ -19,14 +19,19 @@
 
 #include "../iptools/core.h"
 #include <string.h>
+#include <unordered_map>
 
 using namespace std;
 
+// :^) Please let us use python, trying to modify this code base is hell! 
+#define ROI_INPUTS	pch = strtok(NULL, " ");int roi_i = atoi(pch); pch = strtok(NULL, " ");int roi_j = atoi(pch);pch = strtok(NULL, " ");int roi_i_size = atoi(pch);pch = strtok(NULL, " ");int roi_j_size = atoi(pch);pch = strtok(NULL, " ");
 #define MAXLEN 256
+
 
 int main (int argc, char** argv)
 {
-	image src, tgt, temp1, temp2;
+	image src, tgt, temp;
+	
 	FILE *fp;
 	char str[MAXLEN];
 	char outfile[MAXLEN];
@@ -36,40 +41,29 @@ int main (int argc, char** argv)
 		exit(1);
 	}
 
-	while(fgets(str,MAXLEN,fp) != NULL) {
+	while(fgets(str,MAXLEN,fp) != NULL) 
+	{
 		pch = strtok(str, " ");
 		src.read(pch);
-
+		temp.copyImage(src);
+		
 		pch = strtok(NULL, " ");
 		strcpy(outfile, pch);
 
 		pch = strtok(NULL, " ");
-		if (strcmp(pch,"add")==0)
-		{
-			utility::roi(src, temp1, 30, 30, 400, 350);
-			utility::addGrey(temp1, temp2, 80);
-			utility::mergeRoi(src, temp2, tgt, 30, 30, 400, 350);
-		}
-		else if (strcmp(pch,"binarize")==0)
-		{
-			utility::roi(src, temp1, 30, 30, 400, 350);
-			utility::binarize(temp1, temp2, 150);
-			utility::mergeRoi(src, temp2, tgt, 30, 30, 400, 350);
-		}
-		else if (strcmp(pch,"rotate")==0)
-		{
-			pch = strtok(NULL, " ");
-			int angle = atoi(pch);
+		int num_of_rois = atoi(pch);
 
-			utility::roi(src, temp1, 30, 30, 250, 300);
-			utility::rotate(temp1, temp2, angle);
-			utility::mergeRoi(src, temp2, tgt, 30, 30, 250, 300);
-		}
-		else if (strcmp(pch,"scale")==0)
+		
+		for(int i = 0; i<num_of_rois; i++)
 		{
-			// utility::roi(src, temp1, 30, 30, 400, 350);
-			// utility::addGrey(temp1, temp2, 150);
-			// utility::mergeRoi(src, temp2, tgt, 30, 30, 400, 350);
+			ROI_INPUTS
+			if (strcmp(pch,"binarize")==0)
+			{
+				pch = strtok(NULL, " ");
+				utility::binarizeWrapper(temp, tgt, atoi(pch), roi_i, roi_j, roi_i_size, roi_j_size);
+			}
+
+			temp.copyImage(tgt);
 		}
 
 		tgt.save(outfile);
@@ -79,64 +73,25 @@ int main (int argc, char** argv)
 }
 
 /*
-
-        else if (strcmp(pch,"rBin")==0) 
+		else if (strcmp(pch,"binarize")==0)
 		{
-			pch = strtok(NULL, " ");
-			int threshold = atoi(pch);
-
-			pch = strtok(NULL, " ");
-			int roi_i = atoi(pch);
-
-			pch = strtok(NULL, " ");
-			int roi_j = atoi(pch);
-
-			pch = strtok(NULL, " ");
-			int roi_i_size = atoi(pch);
-
-			pch = strtok(NULL, " ");
-			int roi_j_size = atoi(pch);
-
-        	utility::roi_binarize(src, tgt, threshold, roi_i, roi_j, roi_i_size, roi_j_size);
-        }
-
-        else if (strcmp(pch,"rAdd")==0) 
-		{
-			pch = strtok(NULL, " ");
-			int value = atoi(pch);
-
-			pch = strtok(NULL, " ");
-			int roi_i = atoi(pch);
-
-			pch = strtok(NULL, " ");
-			int roi_j = atoi(pch);
-
-			pch = strtok(NULL, " ");
-			int roi_i_size = atoi(pch);
-
-			pch = strtok(NULL, " ");
-			int roi_j_size = atoi(pch);
-
-        	utility::roi_addGrey(src, tgt, value, roi_i, roi_j, roi_i_size, roi_j_size);
-        }
-
-        else if (strcmp(pch,"rRotate")==0) 
+			// utility::roi(src, temp1, 30, 30, 400, 350);
+			// utility::binarize(temp1, temp2, 150);
+			// utility::mergeRoi(src, temp2, tgt, 30, 30, 400, 350);
+		}
+		else if (strcmp(pch,"rotate")==0)
 		{
 			pch = strtok(NULL, " ");
 			int angle = atoi(pch);
 
-			pch = strtok(NULL, " ");
-			int roi_i = atoi(pch);
+			// utility::roi(src, temp1, 30, 30, 250, 300);
+			// utility::rotate(temp1, temp2, angle);
+			// utility::mergeRoi(src, temp2, tgt, 30, 30, 250, 300);
 
-			pch = strtok(NULL, " ");
-			int roi_j = atoi(pch);
+		}
+		else if (strcmp(pch,"scale")==0)
+		{
 
-			pch = strtok(NULL, " ");
-			int roi_i_size = atoi(pch);
+		}
 
-			pch = strtok(NULL, " ");
-			int roi_j_size = atoi(pch);
-
-        	utility::roi_rotate(src, tgt, angle, roi_i, roi_j, roi_i_size, roi_j_size);
-        }
 */
