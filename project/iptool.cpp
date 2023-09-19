@@ -26,7 +26,7 @@ using namespace std;
 
 int main (int argc, char** argv)
 {
-	image src, tgt;
+	image src, tgt, temp1, temp2;
 	FILE *fp;
 	char str[MAXLEN];
 	char outfile[MAXLEN];
@@ -43,11 +43,44 @@ int main (int argc, char** argv)
 		pch = strtok(NULL, " ");
 		strcpy(outfile, pch);
 
-		// reading function name, each function will specify 
-		// specify how many parameters will be read
 		pch = strtok(NULL, " ");
+		if (strcmp(pch,"add")==0)
+		{
+			utility::roi(src, temp1, 30, 30, 400, 350);
+			utility::addGrey(temp1, temp2, 80);
+			utility::mergeRoi(src, temp2, tgt, 30, 30, 400, 350);
+		}
+		else if (strcmp(pch,"binarize")==0)
+		{
+			utility::roi(src, temp1, 30, 30, 400, 350);
+			utility::binarize(temp1, temp2, 150);
+			utility::mergeRoi(src, temp2, tgt, 30, 30, 400, 350);
+		}
+		else if (strcmp(pch,"rotate")==0)
+		{
+			pch = strtok(NULL, " ");
+			int angle = atoi(pch);
 
-        if (strcmp(pch,"rBin")==0) 
+			utility::roi(src, temp1, 30, 30, 250, 300);
+			utility::rotate(temp1, temp2, angle);
+			utility::mergeRoi(src, temp2, tgt, 30, 30, 250, 300);
+		}
+		else if (strcmp(pch,"scale")==0)
+		{
+			// utility::roi(src, temp1, 30, 30, 400, 350);
+			// utility::addGrey(temp1, temp2, 150);
+			// utility::mergeRoi(src, temp2, tgt, 30, 30, 400, 350);
+		}
+
+		tgt.save(outfile);
+	}
+	fclose(fp);
+	return 0;
+}
+
+/*
+
+        else if (strcmp(pch,"rBin")==0) 
 		{
 			pch = strtok(NULL, " ");
 			int threshold = atoi(pch);
@@ -106,12 +139,4 @@ int main (int argc, char** argv)
 
         	utility::roi_rotate(src, tgt, angle, roi_i, roi_j, roi_i_size, roi_j_size);
         }
-
-		pch = strtok(NULL, " ");
-
-		tgt.save(outfile);
-	}
-	fclose(fp);
-	return 0;
-}
-
+*/

@@ -13,15 +13,18 @@ class utility
 		static std::string intToString(int number);
 		static int checkValue(int value);
 
-		
-		static void roi_binarize(image &src, image &tgt, int threshold, int roi_i, 
-		int roi_j, int roi_i_size, int roi_j_size);
+		static void roi(image &src, image &tgt, 
+		int roi_i, int roi_j, int roi_i_size, int roi_j_size);
 
-		static void roi_addGrey(image &src, image &tgt, int threshold, int roi_i, 
-		int roi_j, int roi_i_size, int roi_j_size);
+		static void mergeRoi(image &src, image &roi,image &tgt, int roi_i, int roi_j, 
+		int roi_i_size, int roi_j_size);
 
-		static void roi_rotate(image &src, image &tgt, int angle, int roi_i, 
-		int roi_j, int roi_i_size, int roi_j_size);
+		static void binarize(image &src, image &tgt, int threshold);
+
+		static void addGrey(image &src, image &tgt, int value);
+
+		static void rotate(image &src, image &tgt, int angle);
+
 };
 
 #endif
