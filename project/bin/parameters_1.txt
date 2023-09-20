@@ -1,0 +1,4 @@
+baboon.pgm baboon_1_bin150.pgm binarize 150 
+baboon.pgm baboon_1_add50.pgm add 50
+baboon.pgm baboon_1_bin14.pgm scale 14
+baboon.pgm baboon_1_rotate270.pgm rotate 270

@@ -181,6 +181,28 @@ void utility::rotate(image &src, image &tgt, int angle)
 	}
 }
 
+void utility::addColor(image &src, image &tgt, double value)
+{
+	tgt.resize(src.getNumberOfRows(), src.getNumberOfColumns());
+	for (int i=0; i<src.getNumberOfRows(); i++)
+		for (int j=0; j<src.getNumberOfColumns(); j++)
+		{
+			for(int channel = 0; channel<3; channel++)
+				tgt.setPixel(i, j, channel, checkValue( src.getPixel(i, j, channel)*(value/10) ));
+		}
+}
+
+void utility::addColorBrightness(image &src, image &tgt, int value)
+{
+	tgt.resize(src.getNumberOfRows(), src.getNumberOfColumns());
+	for (int i=0; i<src.getNumberOfRows(); i++)
+		for (int j=0; j<src.getNumberOfColumns(); j++)
+		{
+			for(int channel = 0; channel<3; channel++)
+				tgt.setPixel(i, j, channel, checkValue(src.getPixel(i, j, channel) + value));
+		}
+}
+
 
 void utility::binarizeWrapper(image &src, image &tgt, int fnc_input, 
 int roi_i, int roi_j, int roi_i_size, int roi_j_size)
@@ -217,15 +239,20 @@ int roi_i, int roi_j, int roi_i_size, int roi_j_size)
 }
 
 
-void utility::test(image &src, image &tgt, int fnc_input, 
+void utility::addColorWrapper(image &src, image &tgt, int fnc_input, 
 int roi_i, int roi_j, int roi_i_size, int roi_j_size)
 {
-	// roi(src, tgt, roi_i,  roi_j,  roi_i_size,  roi_j_size);
-	// rotate(src, tgt, 180);
-	// binarize(src, tgt, 80);
-	// addGrey(src, tgt, 80);
-
 	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
-	binarize(temp1, temp2, 100);
+	addColor(temp1, temp2, fnc_input);
+	mergeRoi(src, temp2, tgt, roi_i, roi_j, roi_i_size, roi_j_size);
+
+}
+
+
+void utility::addColorBrightnessWrapper(image &src, image &tgt, int fnc_input, 
+int roi_i, int roi_j, int roi_i_size, int roi_j_size)
+{
+	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
+	addColorBrightness(temp1, temp2, fnc_input);
 	mergeRoi(src, temp2, tgt, roi_i, roi_j, roi_i_size, roi_j_size);
 }

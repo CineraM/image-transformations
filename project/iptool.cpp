@@ -19,13 +19,13 @@
 
 #include "../iptools/core.h"
 #include <string.h>
-#include <unordered_map>
+#include <vector>
 
 using namespace std;
 
 // :^) Please let us use python, trying to modify this code base is hell! 
 #define ROI_INPUTS	pch = strtok(NULL, " ");int roi_i = atoi(pch); pch = strtok(NULL, " ");int roi_j = atoi(pch);pch = strtok(NULL, " ");int roi_i_size = atoi(pch);pch = strtok(NULL, " ");int roi_j_size = atoi(pch);pch = strtok(NULL, " ");
-#define XD pch = strtok(NULL, " ");	// :^)
+#define XD pch = strtok(NULL, " ");	// :^))))))))
 #define MAXLEN 256
 
 
@@ -51,7 +51,40 @@ int main (int argc, char** argv)
 		XD
 		strcpy(outfile, pch);
 
-		XD
+		XD // XDDDDD
+
+		bool flag = false;
+		if (strcmp(pch,"binarize")==0)
+		{
+			XD
+			flag = true;
+			utility::binarize(src, tgt, atoi(pch));
+		}
+		else if (strcmp(pch,"add")==0)
+		{
+			XD
+			flag = true;
+			utility::addGrey(src, tgt, atoi(pch));
+		}
+		else if (strcmp(pch,"scale")==0)
+		{
+			XD
+			flag = true;
+			utility::scale(src, tgt, atoi(pch));
+		}
+		else if (strcmp(pch,"rotate")==0)
+		{
+			XD
+			flag = true;
+			utility::rotate(src, tgt, atoi(pch));
+		}
+
+		if(flag)
+		{
+			tgt.save(outfile);
+			continue;
+		}
+
 		int num_of_rois = atoi(pch);
 
 		for(int i = 0; i<num_of_rois; i++)
@@ -76,6 +109,16 @@ int main (int argc, char** argv)
 			{
 				XD
 				utility::rotateWrapper(temp, tgt, atoi(pch), roi_i, roi_j, roi_i_size, roi_j_size);
+			}
+			else if (strcmp(pch,"addColor")==0)
+			{	
+				XD
+				utility::addColorWrapper(temp, tgt, atoi(pch), roi_i, roi_j, roi_i_size, roi_j_size);
+			}
+			else if (strcmp(pch,"addBrightness")==0)
+			{	
+				XD
+				utility::addColorBrightnessWrapper(temp, tgt, atoi(pch), roi_i, roi_j, roi_i_size, roi_j_size);
 			}
 			temp.copyImage(tgt);
 		}
