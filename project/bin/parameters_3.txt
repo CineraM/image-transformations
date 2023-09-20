@@ -1,11 +1,11 @@
-baboon.pgm baboon_3_1_2roi.pgm 2 0 0 150 150 binarize 140     150 150 200 200 rotate 90 
-baboon.pgm baboon_3_2_2roi.pgm 2 0 0 150 150 add 140     150 150 200 200 rotate 90 
-baboon.pgm baboon_3_3_2roi.pgm 2 0 0 150 150 add 140     150 150 200 200 binarize 180 
-baboon.pgm baboon_3_4_3roi.pgm 3 0 0 180 180 binarize 140     150 150 200 200 rotate 90     300 300 70 70 add 40
-baboon.pgm baboon_3_5_3roi.pgm 3 0 0 180 180 add 140     150 150 200 200 rotate 90          300 300 70 70 binarize 200
-baboon.pgm baboon_3_6_3roi.pgm 3 0 0 180 180 add 140     150 150 200 200 binarize 180       300 300 70 70 rotate 180
-baboon.pgm baboon_3_7_3roi.pgm 3 300 300 150 150 rotate 270     30 150 200 200 binarize 158     32 54 67 121 add 150
-baboon.pgm baboon_3_8_3roi.pgm 3 300 300 130 130 rotate 180     30 150 200 200 binarize 158     32 54 67 121 binarize 150
-baboon.pgm baboon_3_9_4roi.pgm 4 0 0 180 180 binarize 140     150 150 200 200 rotate 90     300 300 70 70 add 40    0 0 400 500 scale 13
-baboon.pgm baboon_3_10_4roi.pgm 4 0 0 180 180 add 140     150 150 200 200 rotate 90          300 300 70 70 binarize 200     0 0 400 500 scale 18
-baboon.pgm baboon_3_11_4roi.pgm 4 0 0 180 180 add 140     150 150 200 200 binarize 180       300 300 70 70 rotate 180       0 0 300 500 scale 15
+baboon.pgm baboon_3_1.pgm 2 0 0 400 500 binarizeROI 140 0 0 250 250 rotateROI 90 
+baboon.pgm baboon_3_2.pgm 2 0 0 483 340 addROI 50 150 150 200 200 rotateROI 90
+baboon.pgm baboon_3_3.pgm 2 0 0 150 150 addROI 50 10 10 110 120 binarizeROI 150
+baboon.pgm baboon_3_4.pgm 3 0 0 450 400 binarizeROI 130 30 40 200 200 rotateROI 90 0 0 200 200 scale 18
+baboon.pgm baboon_3_5.pgm 3 0 0 400 350 addROI 70 13 10 300 300 rotateROI 180 0 0 300 300 scale 15
+baboon.pgm baboon_3_6.pgm 3 0 0 400 400 addROI 30 0 0 200 200 rotate 270 10 13 150 150 scale 13
+baboon.pgm baboon_3_7.pgm 3 100 100 400 400 rotateROI 270 1 3 350 340 binarizeROI 158 0 0 330 321 scale 16
+baboon.pgm baboon_3_8.pgm 3 50 50 401 393 rotateROI 90 1 5 294 370 binarizeROI 142 0 0 290 360 scale 20
+baboon.pgm baboon_3_9.pgm 4 0 0 450 450 addROI 50 10 10 400 400 rotateROI 90 0 0 392 341 binarizeROI 180 0 0 390 330 scale 19
+baboon.pgm baboon_3_10.pgm 3 0 0 450 470 binarizeROI 184 30 40 300 320 rotateROI 90 0 0 400 400 scale 13
+baboon.pgm baboon_3_11.pgm 4 0 0 450 470 binarizeROI 184 0 0 450 470 addROI 80 30 40 300 320 rotateROI 90 0 0 400 400 scale 13
