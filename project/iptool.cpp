@@ -78,6 +78,18 @@ int main (int argc, char** argv)
 			flag = true;
 			utility::rotate(src, tgt, atoi(pch));
 		}
+		else if (strcmp(pch,"addColor")==0)
+		{
+			XD
+			flag = true;
+			utility::addColor(src, tgt, atoi(pch));
+		}
+		else if (strcmp(pch,"addBrightness")==0)
+		{
+			XD
+			flag = true;
+			utility::addColorBrightness(src, tgt, atoi(pch));
+		}
 
 		if(flag)
 		{

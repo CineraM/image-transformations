@@ -126,6 +126,8 @@ void utility::addGrey(image &src, image &tgt, int value)
 
 void utility::scale(image &src, image &tgt, float ratio)
 {
+	if(ratio < 10) ratio = 10;
+	if(ratio > 20) ratio = 20;
 	ratio/=10;
 	int rows = (int)((float)src.getNumberOfRows() * ratio);
 	int cols  = (int)((float)src.getNumberOfColumns() * ratio);
@@ -183,6 +185,9 @@ void utility::rotate(image &src, image &tgt, int angle)
 
 void utility::addColor(image &src, image &tgt, double value)
 {
+	if(value < 10) value = 10;
+	if(value > 20) value = 20;
+
 	tgt.resize(src.getNumberOfRows(), src.getNumberOfColumns());
 	for (int i=0; i<src.getNumberOfRows(); i++)
 		for (int j=0; j<src.getNumberOfColumns(); j++)
@@ -194,6 +199,9 @@ void utility::addColor(image &src, image &tgt, double value)
 
 void utility::addColorBrightness(image &src, image &tgt, int value)
 {
+	if(value < -50) value = -50;
+	if(value > 50) value = 50;
+
 	tgt.resize(src.getNumberOfRows(), src.getNumberOfColumns());
 	for (int i=0; i<src.getNumberOfRows(); i++)
 		for (int j=0; j<src.getNumberOfColumns(); j++)
