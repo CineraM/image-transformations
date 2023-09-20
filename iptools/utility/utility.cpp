@@ -212,8 +212,7 @@ void utility::addColorBrightness(image &src, image &tgt, int value)
 }
 
 
-void utility::binarizeWrapper(image &src, image &tgt, int fnc_input, 
-int roi_i, int roi_j, int roi_i_size, int roi_j_size)
+void utility::binarizeWrapper(WRAPPER_PARAMS)
 {
 	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
 	binarize(temp1, temp2, fnc_input);
@@ -221,8 +220,7 @@ int roi_i, int roi_j, int roi_i_size, int roi_j_size)
 }
 
 
-void utility::addGreyWrapper(image &src, image &tgt, int fnc_input, 
-int roi_i, int roi_j, int roi_i_size, int roi_j_size)
+void utility::addGreyWrapper(WRAPPER_PARAMS)
 {
 	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
 	addGrey(temp1, temp2, fnc_input);
@@ -230,16 +228,14 @@ int roi_i, int roi_j, int roi_i_size, int roi_j_size)
 }
 
 
-void utility::scaleWrapper(image &src, image &tgt, int fnc_input, 
-int roi_i, int roi_j, int roi_i_size, int roi_j_size)
+void utility::scaleWrapper(WRAPPER_PARAMS)
 {
 	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
 	scale(temp1, tgt, fnc_input);
 }
 
 
-void utility::rotateWrapper(image &src, image &tgt, int fnc_input, 
-int roi_i, int roi_j, int roi_i_size, int roi_j_size)
+void utility::rotateWrapper(WRAPPER_PARAMS)
 {
 	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
 	rotate(temp1, temp2, fnc_input);
@@ -247,8 +243,7 @@ int roi_i, int roi_j, int roi_i_size, int roi_j_size)
 }
 
 
-void utility::addColorWrapper(image &src, image &tgt, int fnc_input, 
-int roi_i, int roi_j, int roi_i_size, int roi_j_size)
+void utility::addColorWrapper(WRAPPER_PARAMS)
 {
 	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
 	addColor(temp1, temp2, fnc_input);
@@ -257,10 +252,53 @@ int roi_i, int roi_j, int roi_i_size, int roi_j_size)
 }
 
 
-void utility::addColorBrightnessWrapper(image &src, image &tgt, int fnc_input, 
-int roi_i, int roi_j, int roi_i_size, int roi_j_size)
+void utility::addColorBrightnessWrapper(WRAPPER_PARAMS)
 {
 	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
 	addColorBrightness(temp1, temp2, fnc_input);
 	mergeRoi(src, temp2, tgt, roi_i, roi_j, roi_i_size, roi_j_size);
+}
+
+// ONLY ROI FUNCTIONS
+
+void utility::binarizeROI(WRAPPER_PARAMS)
+{
+	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
+	binarize(temp1, tgt, fnc_input);
+}
+
+
+void utility::addGreyROI(WRAPPER_PARAMS)
+{
+	
+	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
+	addGrey(temp1, tgt, fnc_input);
+}
+
+
+void utility::scaleROI(WRAPPER_PARAMS)
+{
+	scale(temp1, tgt, fnc_input);
+}
+
+
+void utility::rotateROI(WRAPPER_PARAMS)
+{
+	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
+	rotate(temp1, tgt, fnc_input);
+}
+
+
+void utility::addColorROI(WRAPPER_PARAMS)
+{
+	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
+	addColor(temp1, tgt, fnc_input);
+
+}
+
+
+void utility::addColorBrightnessROI(WRAPPER_PARAMS)
+{
+	roi(src, temp1, roi_i, roi_j, roi_i_size, roi_j_size);
+	addColorBrightness(temp1, tgt, fnc_input);
 }

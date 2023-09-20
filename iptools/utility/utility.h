@@ -6,6 +6,8 @@
 #include <math.h>
 #include <vector>
 
+#define WRAPPER_PARAMS  image &src, image &tgt, int fnc_input, int roi_i, int roi_j, int roi_i_size, int roi_j_size
+
 class utility
 {
 	public:
@@ -28,23 +30,19 @@ class utility
 		static void addColorBrightness(image &src, image &tgt, int value);
 		static void addColor(image &src, image &tgt, double value);
 
-		static void binarizeWrapper(image &src, image &tgt, int fnc_input, 
-		int roi_i, int roi_j, int roi_i_size, int roi_j_size);
-
-		static void addGreyWrapper(image &src, image &tgt, int fnc_input, 
-		int roi_i, int roi_j, int roi_i_size, int roi_j_size);
-
-		static void scaleWrapper(image &src, image &tgt, int fnc_input, 
-		int roi_i, int roi_j, int roi_i_size, int roi_j_size);
-
-		static void rotateWrapper(image &src, image &tgt, int fnc_input, 
-		int roi_i, int roi_j, int roi_i_size, int roi_j_size);
-
-		static void addColorWrapper(image &src, image &tgt, int fnc_input, 
-		int roi_i, int roi_j, int roi_i_size, int roi_j_size);
-
-		static void addColorBrightnessWrapper(image &src, image &tgt, int fnc_input, 
-		int roi_i, int roi_j, int roi_i_size, int roi_j_size);
+		static void binarizeWrapper(WRAPPER_PARAMS);
+		static void addGreyWrapper(WRAPPER_PARAMS);
+		static void scaleWrapper(WRAPPER_PARAMS);
+		static void rotateWrapper(WRAPPER_PARAMS);
+		static void addColorWrapper(WRAPPER_PARAMS);
+		static void addColorBrightnessWrapper(WRAPPER_PARAMS);
+		
+		static void binarizeROI(WRAPPER_PARAMS);
+		static void addGreyROI(WRAPPER_PARAMS);
+		static void scaleROI(WRAPPER_PARAMS);
+		static void rotateROI(WRAPPER_PARAMS);
+		static void addColorROI(WRAPPER_PARAMS);
+		static void addColorBrightnessROI(WRAPPER_PARAMS);
 
 		static void copyimg(image &src, image &tgt);
 

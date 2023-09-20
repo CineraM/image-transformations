@@ -1,11 +1,2 @@
-vegeta.ppm vegeta_4_1_2roi.ppm 2 0 0 150 150 addColor 16 150 150 200 200 addBrightness -48
-vegeta.ppm vegeta_4_2_2roi.ppm 2 0 0 150 150 addBrightness 46 150 150 200 200 rotate 90 
-vegeta.ppm vegeta_4_3_2roi.ppm 2 0 0 150 150 addColor 17 150 150 200 200 binarize 180 
-vegeta.ppm vegeta_4_4_3roi.ppm 3 0 0 180 180 binarize 140 150 150 200 200 rotate 90 300 300 70 70 addColor 14 
-vegeta.ppm vegeta_4_5_3roi.ppm 3 0 0 180 180 addBrightness -30 150 150 200 200 rotate 90 300 300 70 70 binarize 200 
-vegeta.ppm vegeta_4_6_3roi.ppm 3 0 0 180 180 addColor 12 150 150 200 200 binarize 180 300 300 70 70 rotate 180
-vegeta.ppm vegeta_4_7_3roi.ppm 3 300 300 150 150 rotate 270 30 150 200 200 binarize 158 32 54 67 121 addColor 15
-vegeta.ppm vegeta_4_8_3roi.ppm 3 300 300 130 130 rotate 180 30 150 200 200 binarize 158 32 54 67 121 binarize 150
-vegeta.ppm vegeta_4_9_4roi.ppm 4 0 0 180 180 binarize 140 150 150 200 200 rotate 90 300 300 70 70 addBrightness -40 0 0 400 500 scale 13
-vegeta.ppm vegeta_4_10_4roi.ppm 4 0 0 180 180 addBrightness 40 150 150 200 200 rotate 90 300 300 70 70 binarize 200 0 0 400 500 scale 18
-vegeta.ppm vegeta_4_11_4roi.ppm 4 0 0 180 180 addBrightness -45 150 150 200 200 binarize 180 300 300 70 70 rotate 180 0 0 300 500 scale 15  
+baboon.pgm baboon_test1.pgm 2 0 0 400 400 rotateROI 90  0 0 350 370 binarizeROI 130
+baboon.pgm baboon_test2.pgm 2 0 0 400 400 addROI 50  0 0 350 370 scale 15

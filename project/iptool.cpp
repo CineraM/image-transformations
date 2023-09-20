@@ -132,6 +132,38 @@ int main (int argc, char** argv)
 				XD
 				utility::addColorBrightnessWrapper(temp, tgt, atoi(pch), roi_i, roi_j, roi_i_size, roi_j_size);
 			}
+			// Just ROI Fncs
+			else if (strcmp(pch,"binarizeROI")==0)
+			{
+				XD
+				utility::binarizeROI(temp, tgt, atoi(pch), roi_i, roi_j, roi_i_size, roi_j_size);
+			}
+			else if (strcmp(pch,"addROI")==0)
+			{
+				XD
+				utility::addGreyROI(temp, tgt, atoi(pch), roi_i, roi_j, roi_i_size, roi_j_size);
+			}
+			else if (strcmp(pch,"scaleROI")==0)
+			{
+				XD
+				utility::scaleROI(temp, tgt, atoi(pch), roi_i, roi_j, roi_i_size, roi_j_size);
+			}
+			else if (strcmp(pch,"rotateROI")==0)
+			{
+				XD
+				utility::rotateROI(temp, tgt, atoi(pch), roi_i, roi_j, roi_i_size, roi_j_size);
+			}
+			else if (strcmp(pch,"addColorROI")==0)
+			{	
+				XD
+				utility::addColorROI(temp, tgt, atoi(pch), roi_i, roi_j, roi_i_size, roi_j_size);
+			}
+			else if (strcmp(pch,"addBrightnessROI")==0)
+			{	
+				XD
+				utility::addColorBrightnessROI(temp, tgt, atoi(pch), roi_i, roi_j, roi_i_size, roi_j_size);
+			}
+
 			temp.copyImage(tgt);
 		}
 
